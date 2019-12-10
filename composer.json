@@ -1,0 +1,20 @@
+{
+    "name": "xingyk/helper",
+    "description": "some helper object or functions for self",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xingyankai",
+            "email": "helloxingyankai@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "xingyk\\helper": "src"
+        }
+    }
+}
