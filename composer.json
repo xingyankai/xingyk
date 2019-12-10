@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "xingyk\\helper": "src"
+            "xingyk\\helper\\": "src"
         }
     }
 }
