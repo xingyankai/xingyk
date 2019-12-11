@@ -14,8 +14,19 @@ class FMPrint
             }else{
                 print_r($v);
             }
+            echo '<br>';
         }
         exit;
     }
 
+    public static function ddJson()
+    {
+        $args = func_get_args();
+
+        foreach ($args as $k => $v) {
+            echo json_encode($v);
+            echo '<br>';
+        }
+        exit;
+    }
 }
