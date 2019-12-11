@@ -8,10 +8,7 @@
             "email": "helloxingyankai@163.com"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {
-
-    },
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "xingyk\\helper\\": "src"
