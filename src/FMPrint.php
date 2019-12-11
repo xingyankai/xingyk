@@ -24,7 +24,7 @@ class FMPrint
     {
         $args = func_get_args();
 
-        echo 'pre';
+        echo '<pre>';
         foreach ($args as $k => $v) {
             echo json_encode($v);
             echo '<br>';
