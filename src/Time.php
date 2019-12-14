@@ -8,7 +8,7 @@ class Time
 	 * @param int $quarter 范围 [1, 2, 3, 4] 对应一到四季度
 	 * @return array
 	 */
-	function getQuarterTimestamp($quarter=0)
+	public static function getQuarterTimestamp($quarter=0)
 	{
 		if ($quarter == 0) {
 			$quarter = ceil((date('n'))/3);
@@ -27,7 +27,7 @@ class Time
 	 * User: xingyk
 	 * Date: 2019/12/14
 	 */
-	function getMonthAgoTime($number=0)
+	public static function getMonthAgoTime($number=0)
 	{
 		$year = date('Y');
 		$month = date('n');
