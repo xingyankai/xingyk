@@ -3,6 +3,19 @@ namespace xingyk\helper;
 
 class FMPrint
 {
+    public static function ddJson()
+    {
+        $args = func_get_args();
+
+        echo '<pre>';
+        foreach ($args as $k => $v) {
+            echo json_encode($v);
+            echo '<br>';
+        }
+        exit;
+    }
+
+    
     public static function dd()
     {
         $args = func_get_args();
@@ -15,18 +28,6 @@ class FMPrint
             }else{
                 print_r($v);
             }
-            echo '<br>';
-        }
-        exit;
-    }
-
-    public static function ddJson()
-    {
-        $args = func_get_args();
-
-        echo '<pre>';
-        foreach ($args as $k => $v) {
-            echo json_encode($v);
             echo '<br>';
         }
         exit;

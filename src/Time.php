@@ -21,37 +21,30 @@ class Time
 
 	
 	/**
-	 * Notes: 获取往前推 第N个月的开始和结束时间 默认是lastMonth
+	 * Notes: 获取往前推 第N个月的开始和结束时间戳 默认是lastMonth
 	 * @param int $number 第几个月
 	 * @return array
 	 * User: xingyk
 	 * Date: 2019/12/14
 	 */
-	public static function getMonthAgoTime($number=0)
+	public static function getMonthAgoTimestamp($number = 1)
 	{
-		$year = date('Y');
-		$month = date('n');
+		$begin = mktime(0, 0, 0, date('n') - $number, 1, date('Y'));
+    	$end = mktime(23, 59, 59, date('n') - $number, date('t', $begin), date('Y'));
 
-		if ($number >= $month) {
-			$diffMonth = ($number - $month) % 12;
-			$yearDiff = ($diffMonth > 0) ? ceil( ($number-$month) / 12 ) : 1;
-			$year -= $yearDiff;
-			$month = 12 - $diffMonth;
-		}else{
-			$month = $month - $number;
-		}
-		if ( empty($number) ) {
-			$month = date('n') - 1;
-		}
-
-		$beginTime = $year . '-'. $month . '-01';
-		$begin = mktime(0, 0, 0, $month, 1, $year);
-		$end = mktime(23, 59, 59, $month, date('t', $begin), $year);
-		$endTime = date( 'Y-m-d', $end );
-
-		return [
-			'date' => [$beginTime, $endTime],  
-			'timestamp' => [$begin, $end]
-		];
+    	return [$begin, $end];	
 	}
+
+
+	/**
+	 * 获取往前推 第N个月的年月份
+	 * @param int $number 前第几个月
+	 * @return string
+	 */
+	public static function getMonthAgoDate($number = 1)
+	{
+		return date('Y-m', mktime(0, 0, 0, date('n') - $number, 1, date('Y')));
+	}
+
+
 }
