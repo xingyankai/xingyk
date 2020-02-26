@@ -41,10 +41,56 @@ class Time
 	 * @param int $number 前第几个月
 	 * @return string
 	 */
-	public static function getMonthAgoDate($number = 1)
+	public static function getMonthAgoMonth($number = 1)
 	{
 		return date('Y-m', mktime(0, 0, 0, date('n') - $number, 1, date('Y')));
 	}
 
+	/**
+	 * 获取往前推 第N个月的月开始结束日期
+	 * @param int $number 前第几个月
+	 * @return array
+	 */
+	public static function getMonthAgoDate($number = 1)
+	{
+		$begin = mktime(0, 0, 0, date('n') - $number, 1, date('Y'));
+		$end = mktime(23, 59, 59, date('n') - $number, date('t', $begin), date('Y'));
+
+		return [date('Y-m-d', $begin), date('Y-m-d', $end)];
+	}
+
+	/**
+	 * 获取往前推 第N个月的月开始结束日期
+	 * @param int $startTimestamp 开始时间戳
+	 * @param int $endTimestamp 结束时间戳
+	 * @return array
+	 */
+	public static function getBetweenDays($startTimestamp, $endTimestamp)
+	{
+		$days = [];
+		while( $startTimestamp <= $endTimestamp ){
+			$days[] = date('Y-m-d',$startTimestamp);
+			$startTimestamp = strtotime('+1 day', $startTimestamp);
+		}
+	
+		return $days;
+	}
+	
+	/**
+	 * 获取往前推 第N个月的月开始结束日期
+	 * @param int $startTimestamp 开始时间戳
+	 * @param int $endTimestamp 结束时间戳
+	 * @return array
+	 */
+	public static function getBetweenMonths($startTimestamp, $endTimestamp)
+	{
+		$months = [];
+		while( $startTimestamp <= $endTimestamp ){
+			$months[] = date('Y-m',$startTimestamp);
+			$startTimestamp = strtotime('+1 month', $startTimestamp);
+		}
+	
+		return $months;
+	}
 
 }
