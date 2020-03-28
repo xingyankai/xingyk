@@ -93,4 +93,15 @@ class Time
 		return $months;
 	}
 
+	/**
+	 * 获取两个日期之间间隔月数
+	 * @param string $dateOne 2019-01 以-为分割符
+	 * @param string $dateTwo 同上
+	 */
+	public static function getBetweenMonthNums($dateOne, $dateTwo) {
+		list($yearOne, $monthOne) = explode('-', $dateOne);
+		list($yearTwo, $monthTwo) = explode('-', $dateTwo);
+		
+		return abs((($yearOne - $yearTwo) * 12) + ($monthOne - $monthTwo));
+	}
 }
