@@ -13,17 +13,19 @@ class TFTool
      * Date: 2020/1/9
      * @param $param
      * @param $key
-     * @return bool
+     * @return bool true 有效 false 无效
      */
-    public static function isValid($param, $key=false)
+    public static function isValid($param, $key='')
     {
         if ($key) {
-            $value = $param[$key];
+            $value = isset($param[$key]);
         } else {
             $value = $param;
         }
-        
-        return isset($value) && !empty($value) && (floatval($value) != 0);
+        if (preg_match('/^(\d+)\.(\d+)/', $value)) { // 匹配是小数，主要是匹配"0.00"
+            $value = floatval($value);
+        }
+        return !empty($value);
     }
 
 }
