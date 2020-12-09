@@ -18,14 +18,36 @@ class TFTool
     public static function isValid($param, $key='')
     {
         if ($key) {
-            $value = isset($param[$key]);
+            $value = isset($param[$key]) ? $param[$key] : false;
         } else {
             $value = $param;
         }
-        if (preg_match('/^(\d+)\.(\d+)/', $value)) { // 匹配是小数，主要是匹配"0.00"
+        if (is_string($value) && preg_match('/^(\d+)\.(\d+)/', $value)) { // 匹配是小数，主要是匹配"0.00"
             $value = floatval($value);
         }
         return !empty($value);
     }
 
+
+    /**
+     * Notes: 检测以分隔符串联的字符串是否有效，且返回有效值
+     * User: xingyk
+     * Date: 2020/12/9
+     * @param $explodeString
+     * @param string $delimiter
+     * @return bool|false|string[]
+     */
+    function checkExplodeString($explodeString, $delimiter=',')
+    {
+        if (empty($explodeString)) {
+            return false;
+        }
+        $exArr = explode($delimiter, $explodeString);
+        $exArr = array_unique($exArr);
+        if (count($exArr) == 1 && empty($exArr[0])) {
+            return false;
+        }
+
+        return $exArr;
+    }
 }

@@ -105,4 +105,29 @@ class Time
 		
 		return abs((($yearOne - $yearTwo) * 12) + ($monthOne - $monthTwo));
 	}
+
+    /**
+     * 获取某段日期内的周几
+     * @param string $startDate 2019-01-01
+     * @param string $endDate
+     * @param array $wdayKeys 一周中的周几 [1, 2] （1 周一 2 周二）
+     */
+    function getWdays($startDate, $endDate, Array $wdayKeys) {
+        $start = new \DateTime($startDate);
+        $end = new \DateTime($endDate);
+        $end = $end->modify('+1 day');
+
+        $interval = new DateInterval('P1D'); // period
+        $daterange = new DatePeriod($start, $interval ,$end);
+
+        $wdays = [];
+        foreach($daterange as $date){
+            if ( in_array($date->format('N'), $wdayKeys)) {
+                $wdays[] = $date->getTimestamp();
+            }
+
+        }
+
+        return $wdays;
+    }
 }
